@@ -28,7 +28,7 @@ jobs:
             openapitools/openapi-generator-cli generate \
               -i /local/openapi.json \
               -g python \
-              --package-name simple-cli-client \
+              --package-name api-for-dummies-client \
               -o /local/generated_client
 
       - name: Enrich Package Metadata
@@ -59,6 +59,7 @@ jobs:
 
       - name: Publish package to GitHub Packages
         run: |
+          echo "Uploading to: https://pypi.pkg.github.com/${{ github.repository }}"
           twine upload --repository-url https://pypi.pkg.github.com/${{ github.repository }} \
             --username __token__ \
             --password ${{ secrets.GITHUB_TOKEN }} \
