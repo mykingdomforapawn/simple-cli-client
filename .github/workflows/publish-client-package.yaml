@@ -28,6 +28,7 @@ jobs:
             openapitools/openapi-generator-cli generate \
               -i /local/openapi.json \
               -g python \
+              --package-name simple-cli-client \
               -o /local/generated_client
 
       - name: Set up Python
