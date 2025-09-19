@@ -22,10 +22,13 @@ jobs:
 
       - name: Generate client code from spec
         run: |
-          docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
-            -i /local/openapi.json \
-            -g python \
-            -o /local/generated_client
+          docker run --rm \
+            --user $(id -u):$(id -g) \
+            -v "${PWD}:/local" \
+            openapitools/openapi-generator-cli generate \
+              -i /local/openapi.json \
+              -g python \
+              -o /local/generated_client
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -47,4 +50,4 @@ jobs:
             --username __token__ \
             --password ${{ secrets.GITHUB_TOKEN }} \
             dist/*
-        working-directory: ./generated_client # Run twine where the dist/ folder is
+        working-directory: ./generated_client
