@@ -33,7 +33,15 @@ jobs:
 
       - name: Enrich Package Metadata
         run: |
+          # Change package name to match what you want to publish
+          sed -i 's|^NAME = "openapi-client"|NAME = "api-for-dummies-client"|' generated_client/setup.py
+
+          # Add the repository URL for better metadata
           sed -i 's|url="",|url="https://github.com/${{ github.repository }}",|' generated_client/setup.py
+
+          # Print the modified setup.py for debugging
+          echo "==== setup.py after modification ===="
+          cat generated_client/setup.py
 
       - name: Set up Python
         uses: actions/setup-python@v5
