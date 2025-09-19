@@ -51,7 +51,7 @@ jobs:
 
       - name: Publish package to GitHub Packages
         run: |
-          twine upload --repository-url https://pypi.pkg.github.com/${{ github.repository_owner }} \
+          twine upload --repository-url https://pypi.pkg.github.com/${{ github.repository }} \
             --username __token__ \
             --password ${{ secrets.GITHUB_TOKEN }} \
             dist/*
