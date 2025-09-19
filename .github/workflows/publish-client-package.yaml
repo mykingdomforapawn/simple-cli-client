@@ -1,0 +1,50 @@
+name: Regenerate and Publish Client Package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out client repository
+        uses: actions/checkout@v4
+
+      - name: Download latest openapi.json from server repo
+        run: |
+          gh release download --repo mykingdomforapawn/api-for-dummies --pattern 'openapi.json' --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate client code from spec
+        run: |
+          docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
+            -i /local/openapi.json \
+            -g python \
+            -o /local/generated_client
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build Python package
+        run: python -m build
+        working-directory: ./generated_client
+
+      - name: Publish package to GitHub Packages
+        run: |
+          twine upload --repository-url https://pypi.pkg.github.com/mykingdomforapawn \
+            --username __token__ \
+            --password ${{ secrets.GITHUB_TOKEN }} \
+            dist/*
+        working-directory: ./generated_client # Run twine where the dist/ folder is
