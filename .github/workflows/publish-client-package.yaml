@@ -59,7 +59,7 @@ jobs:
 
       - name: Publish package to GitHub Packages
         run: |
-          twine upload --repository-url https://upload.pkg.github.com/mykingdomforapawn \
+          twine upload --repository-url https://upload.pkg.github.com/mykingdomforapawn/simple-cli-client \
             --username __token__ \
             --password ${{ secrets.GITHUB_TOKEN }} \
             dist/*
