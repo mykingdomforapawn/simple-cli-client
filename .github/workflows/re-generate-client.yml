@@ -1,0 +1,37 @@
+name: Regenerate API Client
+
+on:
+  workflow_dispatch: # Allows you to run this workflow manually
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out client repository
+        uses: actions/checkout@v4
+
+      - name: Download latest openapi.json from server repo
+        run: |
+          gh release download --repo mykingdomforapawn/api-for-dummies --pattern 'openapi.json' --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate client code from spec
+        run: |
+          docker run --rm \
+            --user $(id -u):$(id -g) \
+            -v "${PWD}:/local" \
+            openapitools/openapi-generator-cli generate \
+              -i /local/openapi.json \
+              -g python \
+              -o /local/generated_client
+
+      - name: Create Pull Request if client has changed
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "feat: Regenerate API client from upstream spec"
+          title: "Update API Client"
+          body: "Automated regeneration of the API client based on a new specification from the `api-for-dummies` repository."
+          branch: "chore/regenerate-client"
+          delete-branch: true
