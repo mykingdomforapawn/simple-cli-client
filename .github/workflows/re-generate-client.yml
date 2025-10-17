@@ -1,7 +1,7 @@
 name: Regenerate API Client
 
 on:
-  workflow_dispatch: # Allows you to run this workflow manually
+  workflow_dispatch:
 
 jobs:
   regenerate:
