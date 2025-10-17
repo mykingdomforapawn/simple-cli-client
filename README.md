@@ -1,4 +1,4 @@
-# API for Dummies - CLI Client
+# Simple CLI Client
 
 A simple CLI project for consuming a REST API using an auto-generated client library.
 
@@ -8,7 +8,7 @@ A simple CLI project for consuming a REST API using an auto-generated client lib
 
 ## Purpose
 
-This project is a companion to the `api-for-dummies` server. Its purpose is to explore the concepts of consuming a REST API using a client library that is automatically generated from an OpenAPI specification. It demonstrates how a "client" application can be completely decoupled from a "server," communicating only through a shared API contract, and how this process can be automated.
+This project is a companion to the [`api-for-dummies`](https://github.com/mykingdomforapawn/api-for-dummies) server. Its purpose is to explore the concepts of consuming a REST API using a client library that is automatically generated from an OpenAPI specification. It demonstrates how a "client" application can be completely decoupled from a "server," communicating only through a shared API contract, and how this process can be automated.
 
 ---
 
