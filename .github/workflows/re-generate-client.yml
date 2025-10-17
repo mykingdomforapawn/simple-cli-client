@@ -26,12 +26,23 @@ jobs:
               -g python \
               -o /local/generated_client
 
+      - name: Patch Generated Code
+        run: |
+          # Patch 1: Fix relative import in document_create.py
+          sed -i 's|from openapi_client.models.document_type import DocumentType|from .document_type import DocumentType|' generated_client/openapi_client/models/document_create.py
+          
+          # Patch 2: Fix relative import in models/__init__.py
+          sed -i 's|from openapi_client.models.document_type import DocumentType|from .document_type import DocumentType|' generated_client/openapi_client/models/__init__.py
+          
+          # Patch 3: Fix relative import in openapi_client/__init__.py
+          sed -i 's|from openapi_client.models.document_type import DocumentType as DocumentType|from .models.document_type import DocumentType as DocumentType|' generated_client/openapi_client/__init__.py
+
       - name: Create Pull Request if client has changed
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "feat: Regenerate API client from upstream spec"
           title: "Update API Client"
-          body: "Automated regeneration of the API client based on a new specification from the `api-for-dummies` repository."
+          body: "Automated regeneration of the API client based on a new specification from the `api-for-dummies` repository. Includes automated patches for generator bugs."
           branch: "chore/regenerate-client"
           delete-branch: true

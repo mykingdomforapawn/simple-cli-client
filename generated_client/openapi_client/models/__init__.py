@@ -15,7 +15,7 @@
 # import models into model package
 from openapi_client.models.document import Document
 from openapi_client.models.document_create import DocumentCreate
-from openapi_client.models.document_type import DocumentType
+from .document_type import DocumentType
 from openapi_client.models.http_validation_error import HTTPValidationError
 from openapi_client.models.validation_error import ValidationError
 from openapi_client.models.validation_error_loc_inner import ValidationErrorLocInner

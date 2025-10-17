@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
-from openapi_client.models.document_type import DocumentType
+from .document_type import DocumentType
 from typing import Optional, Set
 from typing_extensions import Self
 

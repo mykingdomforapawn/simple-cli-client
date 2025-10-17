@@ -53,7 +53,7 @@ from openapi_client.exceptions import ApiException as ApiException
 # import models into sdk package
 from openapi_client.models.document import Document as Document
 from openapi_client.models.document_create import DocumentCreate as DocumentCreate
-from openapi_client.models.document_type import DocumentType as DocumentType
+from .models.document_type import DocumentType as DocumentType
 from openapi_client.models.http_validation_error import HTTPValidationError as HTTPValidationError
 from openapi_client.models.validation_error import ValidationError as ValidationError
 from openapi_client.models.validation_error_loc_inner import ValidationErrorLocInner as ValidationErrorLocInner
