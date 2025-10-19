@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **name** | **str** |  | 
 **owner** | **str** |  | 
-**type** | **str** |  | 
+**type** | [**DocumentType**](DocumentType.md) |  | 
 
 ## Example
 
