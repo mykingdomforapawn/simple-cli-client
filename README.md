@@ -12,6 +12,37 @@ This project is a companion to the [`api-for-dummies`](https://github.com/myking
 
 ---
 
+## End-to-End Development Workflow
+
+This section describes the full, typical workflow for making a change to the API server and propagating that change to this CLI client.
+
+**Step 1: Modify the API Server (`api-for-dummies` repo)**
+* All changes start here. Make your desired code change, for example:
+    * Add a new endpoint (e.g., to search for documents).
+    * Modify a model (e.g., add a "ARCHIVE" status to the `DocumentType` enum).
+* Run the server locally (`uvicorn main:app --reload`) to manually verify your changes.
+
+**Step 2: Write and Run API Tests**
+* Add a new test to the `tests/` directory to cover your new feature.
+* Run `pytest` locally to confirm that the new test passes and no existing tests have broken.
+* Commit and push your changes to the `main` branch.
+
+**Step 3: Create a New API Release**
+* Once you are happy with your changes, create a new versioned release in the `api-for-dummies` repository.
+* The process for this is detailed in the **[API server's README](https://github.com/mykingdomforapawn/api-for-dummies#how-to-create-a-release)**.
+
+**Step 4: Regenerate the CLI Client (this repo)**
+* Navigate to the `simple-cli-client` repository on GitHub.
+* Go to the **Actions** tab, select the **Regenerate API Client** workflow, and manually trigger it by clicking "Run workflow".
+* The workflow will automatically download the new `openapi.json` from the release you created in the previous step and generate the updated client code.
+
+**Step 5: Review and Merge the Client PR**
+* The workflow will open a new Pull Request with the changes to the generated client code.
+* Review the PR to see what has changed (e.g., a new method for your new endpoint, an updated enum).
+* Merge the PR. Your CLI client is now officially in sync with the latest version of the API.
+
+---
+
 ## Features
 
 * **Technology**: A Command-Line Interface (CLI) built with Python and **Typer**.
