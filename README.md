@@ -87,4 +87,3 @@ This project has explored the following concepts:
 * [x] **API Consumption**: Used the auto-generated client to interact with a live API.
 * [x] **CLI Implementation**: Built a user-friendly CLI application using Typer.
 * [x] **Inter-Repository Automation**: Created a GitHub Actions workflow that automatically regenerates the client via pull request when the upstream API spec changes.
-* [ ] **Client-Side Testing**: Write tests for the `client.py` wrapper to ensure the commands work as expected.
