@@ -33,6 +33,21 @@ def list_all():
         raise typer.Exit(code=1)
 
 @app.command()
+def list_of_owner(
+        owner: str = typer.Option(..., "--owner", "-o", help="The owner of the document.")
+):
+    """Fetches and prints all documents from the API from a specific owner."""
+    typer.echo("Fetching all documents of owner...")
+    try:
+        for api_instance in get_api_instance():
+            response = api_instance.get_documents_documents_get(owner)
+            typer.echo("\n✅ Success! Found documents:")
+            pprint(response)
+    except ApiException as e:
+        typer.echo(f"\n❌ API Error: {e.reason}", err=True)
+        raise typer.Exit(code=1)
+
+@app.command()
 def create(
         name: str = typer.Option(..., "--name", "-n", help="The name of the document."),
         owner: str = typer.Option(..., "--owner", "-o", help="The owner of the document."),

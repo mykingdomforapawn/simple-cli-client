@@ -54,6 +54,7 @@ This section describes the full, typical workflow for making a change to the API
     * Opens a pull request with the updated client code.
 * **Commands (Full CRUD)**:
     * `list`: Fetches and displays all documents.
+    * `list-of-owner`: Fetches and displays all documents of a specific owner.
     * `create`: Creates a new document via command-line options.
     * `delete`: Deletes a document by its ID.
 
