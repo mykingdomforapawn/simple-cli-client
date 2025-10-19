@@ -16,6 +16,14 @@ Method | HTTP request | Description
 
 Create Document
 
+Creates a new document.
+Example Request Body:
+{
+    "name": "My First Report",
+    "owner": "Admin",
+    "type": "PDF"
+}
+
 ### Example
 
 
@@ -84,6 +92,9 @@ No authorization required
 
 Delete Document
 
+Deletes a document by its unique ID.
+Example: DELETE /documents/1
+
 ### Example
 
 
@@ -148,6 +159,9 @@ No authorization required
 
 Get Document By Id
 
+Retrieves a single document by its unique ID.
+Example: /documents/1
+
 ### Example
 
 
@@ -211,9 +225,13 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_documents_documents_get**
-> List[Document] get_documents_documents_get()
+> List[Document] get_documents_documents_get(owner=owner)
 
 Get Documents
+
+Gets a list of all documents.
+Can optionally be filtered by the 'owner' query parameter.
+Example: /documents/?owner=Admin
 
 ### Example
 
@@ -235,10 +253,11 @@ configuration = openapi_client.Configuration(
 with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.DefaultApi(api_client)
+    owner = 'owner_example' # str |  (optional)
 
     try:
         # Get Documents
-        api_response = api_instance.get_documents_documents_get()
+        api_response = api_instance.get_documents_documents_get(owner=owner)
         print("The response of DefaultApi->get_documents_documents_get:\n")
         pprint(api_response)
     except Exception as e:
@@ -249,7 +268,10 @@ with openapi_client.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **owner** | **str**|  | [optional] 
 
 ### Return type
 
@@ -269,6 +291,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -276,6 +299,15 @@ No authorization required
 > Document update_document_documents_document_id_put(document_id, document_create)
 
 Update Document
+
+Updates an existing document by its unique ID.
+Example: PUT /documents/1
+With Request Body:
+{
+    "name": "My Updated Report",
+    "owner": "Admin",
+    "type": "Word Doc"
+}
 
 ### Example
 
